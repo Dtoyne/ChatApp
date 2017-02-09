@@ -23,6 +23,22 @@ class App extends Component {
     this.state = data;
   }
 
+  sendMessage(event) {
+    if (event.key === 'Enter') {
+      const newMessage = {
+        type: "postMessage",
+        usrname: this.state.currentUser.name,
+        content: event.target.value
+      }
+    }
+  }
+
+  updateUser(event) {
+    if (event.key === 'Enter') {
+      event.target.value.trim() === "" ? name = "Anonymous" : name = event.target.value;
+    }
+  }
+
   render() {
     console.log("rending App");
     return (
