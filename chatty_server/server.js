@@ -30,7 +30,7 @@ wss.on('connection', (ws) => {
   ws.on('message', (message) => {
     const data = JSON.parse(message);
 
-    data,id = uuid.v4();
+    data.id = uuid.v4();
 
     switch (data.type) {
       case "postMessage":

@@ -26,7 +26,8 @@ class App extends Component {
   }
 
   updateUser(event) {
-    if (event.charCode == 13) {
+    if (event.keyCode == 13) {
+      console.log("userChanged");
       event.target.value.trim() === "" ? name = "Anonymous" : name = event.target.value;
       this.setState({currentUser: {name: name}});
       if (this.state.currentUser.name !== name) {
@@ -40,7 +41,7 @@ class App extends Component {
     }
   }
 
-  _onmesage() {
+  _onmessage() {
    this.socket.onmessage = (event) => {
      const data = JSON.parse(event.data);
      switch (data.type) {
@@ -65,11 +66,11 @@ class App extends Component {
  }
 
   componentDidMount() {
-    this.socket = new WebSocket("ws://localhost:4000");
+    this.socket = new WebSocket("ws://localhost:8080");
     this.socket.onopen = (event) => {
       console.log("Connected to server!");
     }
-    this._onmesage();
+    this._onmessage();
     console.log("Component did mount! App");
   }
 
