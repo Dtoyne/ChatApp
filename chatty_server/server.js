@@ -1,9 +1,6 @@
-// server.js
-
 const express = require('express');
 const SocketServer = require('ws').Server;
 const uuid = require('node-uuid');
-
 
 // Set the port to 5000
 const PORT = 5000;
@@ -21,10 +18,6 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
-// Set up a callback that will run when a client connects to the server
-// When a client connects they are assigned a socket, represented by
-// the ws parameter in the callback.
 let counter = 0;
 
 wss.on('connection', (ws) => {
@@ -37,7 +30,6 @@ wss.on('connection', (ws) => {
 
   ws.on('message', handleMessage);
 
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected')
     counter -= 1;
@@ -50,7 +42,6 @@ wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
     client.send(JSON.stringify(data));
   });
-  // counter++;
   console.log(counter)
 };
 

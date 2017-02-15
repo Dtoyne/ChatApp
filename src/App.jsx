@@ -19,17 +19,12 @@ class App extends Component {
 
     this.socket = new WebSocket("ws://localhost:5000");
 
-    console.log("componentDidMount <App />");
-
     this.socket.onopen = (event) => {
-      console.log("Connected to server");
+    console.log("Connected to server");
     };
 
     this.socket.onmessage = (event) => {
       let data = (JSON.parse(event.data))
-      console.log("onmessage")
-      console.log(data)
-      console.log(this.state.messages)
       switch (data.type) {
         case 'incomingMessage':
           this.setState({messages: this.state.messages.concat(data)});
@@ -69,12 +64,7 @@ class App extends Component {
         const newMessage = {type: "postNotification", content: `${this.state.currentUser.name} has changed their name to ${newName.name}`};
         this.socket.send(JSON.stringify(newMessage))
       }
-    }
-  }
 
-  render() {
-    console.log("Rendering <App/>");
-    console.log("App: ", this.state.messages)
     return (
       <div className="wrapper">
         <nav>

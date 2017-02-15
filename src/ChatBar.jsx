@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 
 class ChatBar extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
     }
   }
+
   render() {
     console.log("Rendering <ChatBar/>");
     return (
@@ -25,4 +27,5 @@ class ChatBar extends Component {
     );
   }
 }
+
 export default ChatBar;

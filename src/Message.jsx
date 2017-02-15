@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
 class Message extends Component {
+
   render() {
-    console.log("Message: ", this.props.message)
     if(this.props.message.type==='incomingMessage'){
       return(
         <div className="message" >
@@ -10,7 +10,9 @@ class Message extends Component {
           <span className="content">{ this.props.message.content }</span>
         </div>
       )
-    } else if(this.props.message.type==='incomingNotification'){
+    }
+
+    else if(this.props.message.type==='incomingNotification'){
       return  (<div className="message system" >
                 { this.props.message.content }
                </div>)
