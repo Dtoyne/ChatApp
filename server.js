@@ -9,10 +9,10 @@ new WebpackDevServer(webpack(config), {
       poll: 1000
     }
   })
-  .listen(5000, '0.0.0.0', function (err, result) {
+  .listen(3000, '0.0.0.0', function (err, result) {
     if (err) {
       console.log(err);
     }
 
-    console.log('Running at http://0.0.0.0:5000');
+    console.log('Running at http://0.0.0.0:3000');
   });
