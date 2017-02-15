@@ -61,7 +61,7 @@ class App extends Component {
   }
 
   username = (event) => {
-    if(event.charCode === 13) {
+    if(event.charCode === 13 || event.charCode === 9) {
       if(event.target.value != this.state.currentUser.name && event.target.value){
         let trimmedName = event.target.value.replace(/^\s+|\s+$/g,'')
         let newName={name: trimmedName}

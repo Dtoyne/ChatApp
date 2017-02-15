@@ -25,10 +25,12 @@ function getRandomIntInclusive(min, max) {
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
+let counter = 0;
+
 wss.on('connection', (ws) => {
   console.log('Client connected');
-
-  wss.broadcast({type: 'counter', count: wss.clients.length});
+  counter += 1;
+  wss.broadcast({type: 'counter', count: counter});
 
   let randColour = colours[getRandomIntInclusive(0, colours.length - 1)]
   ws.send(JSON.stringify({type: 'colour', colour: randColour}))
@@ -38,18 +40,17 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     console.log('Client disconnected')
-    wss.broadcast({type: 'counter', count: wss.clients.length})
+    counter -= 1;
+    wss.broadcast({type: 'counter', count: counter})
   });
 });
-
-let counter = 0
 
 wss.broadcast = (data) => {
   console.log("Broadcasting: ", data)
   wss.clients.forEach((client) => {
     client.send(JSON.stringify(data));
   });
-  counter++;
+  // counter++;
   console.log(counter)
 };
 
